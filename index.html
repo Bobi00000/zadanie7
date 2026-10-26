@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Один перевал, восемь часов</title>
+  <meta name="description" content="Галерея из восьми изображений в виде горизонтального слайдера с пейджером.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page__header">
+      <h1 class="page__title">Один перевал, восемь часов</h1>
+      <p class="page__lead">Горный хребет от рассвета до зимней ночи. Листайте стрелками, точками под галереей или свайпом.</p>
+    </header>
+
+    <section class="gallery" id="gallery" aria-roledescription="карусель" aria-label="Галерея горных пейзажей" data-gallery>
+      <div class="gallery__frame">
+        <button class="gallery__arrow gallery__arrow--prev" type="button" aria-label="Предыдущая страница" data-prev>
+          <svg class="gallery__icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="gallery__viewport" data-viewport>
+          <ul class="gallery__track" data-track>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="p.svg" width="900" height="600" alt="Горы на рассвете: над хребтом поднимается солнце, небо сиреневое и оранжевое">
+              <figcaption class="gallery__caption">Рассвет</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="pp.svg" width="900" height="600" alt="Утренние горы под голубым небом с мягким светом">
+              <figcaption class="gallery__caption">Утро</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="03-noon.svg" width="900" height="600" alt="Полдень в горах: яркое солнце высоко над зелёными хребтами">
+              <figcaption class="gallery__caption">Полдень</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="04-evening.svg" width="900" height="600" alt="Закат над горами: тёмно-лиловые хребты на фоне оранжевого неба">
+              <figcaption class="gallery__caption">Вечер</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="05-dusk.svg" width="900" height="600" alt="Сумерки в горах: звёзды над тёмно-синими хребтами и розовый край неба">
+              <figcaption class="gallery__caption">Сумерки</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="06-night.svg" width="900" height="600" alt="Ночные горы под звёздным небом и яркой луной">
+              <figcaption class="gallery__caption">Ночь</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="07-autumn.svg" width="900" height="600" alt="Осенние горы с рыжими и коричневыми склонами">
+              <figcaption class="gallery__caption">Осень</figcaption>
+            </figure>
+          </li>
+          <li class="gallery__slide">
+            <figure class="gallery__figure">
+              <img class="gallery__image" src="08-winter.svg" width="900" height="600" alt="Заснеженные горы под бледным зимним небом">
+              <figcaption class="gallery__caption">Зима</figcaption>
+            </figure>
+          </li>
+          </ul>
+        </div>
+        <button class="gallery__arrow gallery__arrow--next" type="button" aria-label="Следующая страница" data-next>
+          <svg class="gallery__icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <nav class="gallery__pager" aria-label="Пейджер галереи">
+        <p class="gallery__status" aria-live="polite">Страница <span data-current>1</span> из <span data-total>3</span></p>
+        <ul class="gallery__dots" data-dots></ul>
+      </nav>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
