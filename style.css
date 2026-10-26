@@ -1,0 +1,249 @@
+:root {
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --text: #1d2a2f;
+  --muted: #5a6b72;
+  --accent: #1f6f78;
+  --accent-text: #ffffff;
+  --line: #cfd8d8;
+  --focus: #b8541a;
+  --gap: 1rem;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121a1d;
+    --surface: #1b272b;
+    --text: #e6eeee;
+    --muted: #9db0b4;
+    --accent: #5fc0c9;
+    --accent-text: #0c1a1d;
+    --line: #34454a;
+    --focus: #f0a070;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #121a1d;
+  --surface: #1b272b;
+  --text: #e6eeee;
+  --muted: #9db0b4;
+  --accent: #5fc0c9;
+  --accent-text: #0c1a1d;
+  --line: #34454a;
+  --focus: #f0a070;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+.page {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-block: 2.5rem 3rem;
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.page__header {
+  max-width: 40rem;
+  margin-bottom: 2rem;
+}
+
+.page__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.page__lead {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Галерея: на экране три изображения, на смартфоне (до 37.5em) одно */
+.gallery {
+  --per-view: 3;
+  --slide-gap: 1rem;
+}
+
+.gallery__frame {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.gallery__viewport {
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.gallery__track {
+  display: flex;
+  margin: 0 calc(var(--slide-gap) / -2);
+  padding: 0;
+  list-style: none;
+  transition: transform 0.45s ease;
+}
+
+.gallery__slide {
+  flex: 0 0 calc(100% / var(--per-view));
+  padding-inline: calc(var(--slide-gap) / 2);
+}
+
+.gallery__figure {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.gallery__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  user-select: none;
+}
+
+.gallery__caption {
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+}
+
+.gallery__arrow {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gallery__arrow:hover:not(:disabled) {
+  transform: scale(1.08);
+}
+
+.gallery__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.gallery__arrow:focus-visible,
+.gallery__dot:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.gallery__pager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.gallery__status {
+  margin: 0;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery__dot {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.gallery__dot::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--line);
+  transform: translate(-50%, -50%);
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.gallery__dot[aria-current="true"]::before {
+  width: 1.5rem;
+  border-radius: 0.4rem;
+  background: var(--accent);
+}
+
+@media (max-width: 37.5em) {
+  .gallery {
+    --per-view: 1;
+  }
+
+  /* на смартфоне стрелки лежат поверх изображения */
+  .gallery__frame {
+    position: relative;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery__arrow {
+    position: absolute;
+    top: calc(50% - 2.7rem);
+    z-index: 1;
+    width: 2.75rem;
+    height: 2.75rem;
+    opacity: 0.9;
+  }
+
+  .gallery__arrow--prev {
+    left: 0.5rem;
+  }
+
+  .gallery__arrow--next {
+    right: 0.5rem;
+  }
+
+  .gallery__arrow:disabled {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery__track,
+  .gallery__arrow,
+  .gallery__dot::before {
+    transition: none;
+  }
+}
